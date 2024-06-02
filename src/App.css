@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Butterfly+Kids&display=swap');
+
+*{
+    font-family: "ui-sans-serif";
+}
+
+.butterfly-kids-regular {
+    font-family: "Butterfly Kids", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.butterfly-kids-bold {
+    font-family: "Butterfly Kids", cursive;
+    font-weight: 700;
+    font-style: normal;
+}
+
