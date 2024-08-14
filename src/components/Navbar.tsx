@@ -30,12 +30,12 @@ const menuItems = [
     },
 
     {
-        label: "Galeria od ludzi",
-        href: "/galeria-od-ludzi"
+        label: "Zdjęcia i filmiki Gości",
+        href: "/zdjecia-i-filmiki-gosci"
     },
     {
-        label: "Galeria PRO",
-        href: "/galeria-pro"
+        label: "Zdjęcia od fotografa",
+        href: "/zdjecia-od-fotografa"
     }
 ];
 
@@ -95,6 +95,7 @@ const Navbar = () => {
                     </NavbarMenuItem>
                 ))}
                 <Button
+                    onClick={()=>setIsMenuOpen(false)}
                     className="self-start"
                     color="primary"
                     as={Link}

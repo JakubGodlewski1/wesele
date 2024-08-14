@@ -1,22 +1,11 @@
 import {Accordion, AccordionItem} from "@nextui-org/react";
-
-const songs = [
-    {
-        title: "Pionenka o komarze",
-        content: "content 1"
-    },
-       {
-        title: "Wlazł kotek na płotek",
-        content: "content 2"
-    }
-
-]
+import {songs} from "../data/songs.ts";
 
 const Spiewnik = () => {
     return (
         <Accordion>
             {songs.map(s=>(
-                <AccordionItem key={s.content} aria-label={s.title} title={s.title}>
+                <AccordionItem as="pre" key={s.content} aria-label={s.title} title={s.title}>
                     {s.content}
                 </AccordionItem>
             ))}

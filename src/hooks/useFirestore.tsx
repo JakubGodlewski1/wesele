@@ -1,52 +1,58 @@
-import {useEffect, useState} from "react";
-import {projectFirestore} from "../firebase/config.ts";
+import {useState} from "react";
+import {db} from "../firebase/config.ts";
+import {collection, getDocs, addDoc, updateDoc, doc} from "firebase/firestore"
 
-export const useFirestore = (collection: string) => {
-    const [docs, setDocs] = useState<object[]>([])
+export const useFirestore = (collectionName: string) => {
     const [error, setError] = useState<null | string>(null)
     const [pending, setPending] = useState(false)
-    const [success,setSuccess] = useState(false)
 
-
-    const confirmArrival = async (personDetails:{
-        name: string,
-        numberOfGuests: string,
-        numberOfGuestsRequiringAccommodation: string,
-        additionalInfo: string
-    }) => {
-        const collectionRef = projectFirestore.collection(collection)
-        setError(null)
+    const getDocuments = async () => {
         try {
+            setError(null)
             setPending(true)
-          await collectionRef.add(personDetails)
-            setSuccess(true)
-        }catch (err){
-            setError("Wystąpił błąd, spróbuj ponownie później bądź potwierdź przybycie telefonicznie")
+
+            const ref = collection(db, collectionName)
+            const snapshot =await getDocs(ref)
+            const documents = []
+            snapshot.docs.forEach(doc=>{
+                documents.push({id:doc.id, ...doc.data()})
+            })
+
+        }catch (err:unknown){
+            console.log(err)
+            setError("Something went wrong")
         }finally {
             setPending(false)
         }
     }
 
-    useEffect(() => {
-        let collectionRef;
-        if (collection==="guests"){
-            collectionRef = projectFirestore.collection(collection)
-        }else{
-            collectionRef =  projectFirestore.collection(collection)
-                .orderBy('createdAt', 'desc')
+    const addDocument = async (doc: object) => {
+        const ref = collection(db, collectionName)
+        try {
+            setPending(true)
+            await addDoc(ref, doc)
+        }catch (err){
+            console.error(err)
+            setError("Something went wrong")
+        }finally {
+            setPending(false)
         }
+    }
 
-       const unsub = collectionRef
-           .onSnapshot((snapshot)=>{
-            const documents:{url:string}[] = []
-            snapshot.docs.forEach(d=>{
-                documents.push(d.data() as {url:string})
-            })
-            setDocs(documents)
-        })
+    const updateDocument = async (id: string, updatedFields: object) => {
+        try {
+            setPending(true);
+            setError(null);
 
-        return ()=> unsub()
-    }, [collection]);
+            const docRef = doc(db, collectionName, id);
+            await updateDoc(docRef, updatedFields);
+        } catch (err) {
+            console.error(err);
+            setError("Something went wrong");
+        } finally {
+            setPending(false);
+        }
+    };
 
-    return {docs, confirmArrival, error, pending, success}
+    return {addDocument, getDocuments, updateDocument, error, pending}
 }

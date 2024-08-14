@@ -1,7 +1,7 @@
 const UstawieniaStolow = () => {
     return (
         <div>
-            ustawienia stolow
+            Po potwierdzeniach obecności pojawi się lista osób przypisana do konkretnego stołu.
         </div>
     );
 };

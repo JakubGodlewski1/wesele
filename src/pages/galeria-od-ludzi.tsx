@@ -1,15 +1,12 @@
-import UploadForm from "../components/UploadForm.tsx";
-import Gallery from "../components/Gallery.tsx";
-import {useFirestore} from "../hooks/useFirestore.tsx";
+// import UploadForm from "../components/UploadForm.tsx";
 
 const GaleriaOdLudzi = () => {
-   const {docs} =  useFirestore("files")
-    const urls = docs as {url: string}[]
 
     return (
         <div>
-            <UploadForm/>
-            <Gallery photoUrls={urls}/>
+            Opcja dodawania zdjęć i filmów będzie dostępna wkrótce
+            {/*<UploadForm/>*/}
+            {/*<Gallery photoUrls={urls}/>*/}
         </div>
     );
 };

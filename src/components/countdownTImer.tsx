@@ -48,22 +48,22 @@ const CountdownTImer = () => {
     return (
         <div className="flex items-center justify-center m-auto space-x-4 text-2xl md:text-5xl font-bold w-[60%]">
             <div className="flex flex-col items-center">
-                <span className="text-gray-800">{timer.days}</span>
-                <span className="text-xs text-gray-500">{timer.days === 1 ? "dzień" : "dni"}</span>
+                <span className="text-gray-800 text-2xl ">{timer.days}</span>
+                <span className="text-xs text-gray-500 ">{timer.days === 1 ? "dzień" : "dni"}</span>
             </div>
             <span className="self-start">:</span>
             <div className="flex flex-col items-center">
-                <span className="text-gray-800">{timer.hours}</span>
+                <span className="text-gray-800 text-2xl ">{timer.hours}</span>
                 <span className="text-xs text-gray-500">{timer.hours === 1 ? "godzina" : timer.hours < 5 && timer.hours > 1 ? "godziny" : "godzin"}</span>
             </div>
             <span className="self-start">:</span>
             <div className="flex flex-col items-center">
-                <span className="text-gray-800">{timer.minutes}</span>
+                <span className="text-gray-800 text-2xl ">{timer.minutes}</span>
                 <span className="text-xs text-gray-500">{timer.minutes === 1 ? "minuta" : timer.minutes < 5 && timer.minutes > 1 ? "minuty" : "minut"}</span>
             </div>
             <span className="self-start">:</span>
             <div className="flex flex-col items-center">
-                <span className="text-gray-800">{timer.seconds}</span>
+                <span className="text-gray-800 text-2xl ">{timer.seconds}</span>
                 <span className="text-xs text-gray-500">{timer.seconds === 1 ? "sekunda" : timer.seconds < 5 && timer.seconds > 1 ? "sekundy" : "sekund"}</span>
             </div>
         </div>
